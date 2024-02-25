@@ -1,7 +1,7 @@
 asdf = input()
 
 index = "꽈콰꿍콸콱불라자짜꽊"
-special_chars = " !@#$%^&*()-+?_=,<>/."
+special_chars = " !@#$%^&*()-+?_=,<>/.~:"
 
 output = ""
 cache = ""
