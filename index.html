@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>꽈자와자 번역기</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <nav>
+            <h1>꽈자와자 번역기</h1>
+            <h4>made by seomeenu</h4> 
+        </nav>
+        <section>
+            <h2>일반 -> 꽈자와자어</h2>
+            <input type="text" id="input" autocomplete="off">
+            <br>
+            <button onclick="run();">번역</button>
+            <span id="output">결과: </span>
+        </section>
+        
+        <section>
+            <h2>꽈자와자어 -> 일반</h2>
+            <input type="text" id="inputBack" autocomplete="off">
+            <br>
+            <button onclick="runBack();">번역</button>
+            <span id="outputBack">결과: </span>
+        </section>
+    </main>
+
+    <script>
+        let input = document.getElementById("input")
+        let output = document.getElementById("output")
+
+        let inputBack = document.getElementById("inputBack")
+        let outputBack = document.getElementById("outputBack")
+        
+        let index = "꽈콰꿍콸콱불라자짜꽊"
+        let specialChars = " !@#$%^&*()-+?_=,<>/;."
+
+        function run(){
+            let asdf = input.value
+            let outputStr = ""
+            for (i=0; i<asdf.length; i++){
+                if (specialChars.includes(asdf[i])){
+                    outputStr += asdf[i] 
+                }
+                else {
+                    let asd = asdf[i].charCodeAt(0).toString()
+                    let res = "" 
+                    for (j=0; j<asd.length; j++){
+                        res += index[parseInt(asd[j])]
+                    }
+                    res += "블"
+                    outputStr += res 
+                }
+            }
+            output.innerText = `결과: ${outputStr}`
+        }
+
+        function runBack(){
+            let asdf = inputBack.value
+            let outputStr = ""
+            let cache = ""
+            for (i=0; i<asdf.length; i++){
+                if (specialChars.includes(asdf[i])){
+                    outputStr += asdf[i] 
+                }
+                else {
+                    if (asdf[i] != "블"){
+                        cache += index.search(asdf[i]).toString()
+                    }
+                    else {
+                        outputStr += String.fromCharCode(parseInt(cache))
+                        cache = ""
+                    }
+                }
+            }
+            outputBack.innerText = `결과: ${outputStr}`
+        }
+
+        input.addEventListener("keydown", function(e){
+            if (e.key == "Enter"){
+                run()
+            }
+        })
+        inputBack.addEventListener("keydown", function(e){
+            if (e.key == "Enter"){
+                runBack()
+            }
+        })
+    </script>
+</body>
+</html>
